@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang='en'>
+    <head>
+        <link rel='shortcut icon' type='image/x-icon' href='../Images/favicon.ico' />
+        <meta charset='UTF-8'>
+        <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+        <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+        <title>Vstuck</title>
+        <link rel='stylesheet' type='text/css' href='VSASTUCKMAIN.CSS'>
+        <style>
+        .main{
+            width: 1100px;
+            margin: auto;
+        }
+        .upperarea{
+            margin: auto;
+            width: 800px;
+        }
+
+        .grayarea{
+            width: 800px;
+            margin: auto;
+        }
+
+        .photo{
+            width: 800px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .textbox{
+            width: 700px;
+            margin: auto;
+        }
+
+        body {
+            background-image: url('../Images/stars.png');
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+        }
+
+        </style>
+    </head>
+    <body>
+        <div class='main'>
+            <h1>First Contact</h1>
+            <div class='upperarea'>
+                <img class='photo' src='../Images/035.png' alt='Image could not be found' >
+            </div>
+            <div class='grayarea'>
+                <br>
+                <div class='textbox'>
+                    <p class='storytext'>The United States Astronauts were surprised to discover that the planet Pehostla housed super-intelligent life forms called the Glirpglorps. The Glirpians were peaceful creatures, and they told the astronauts they could live with them for a short while before they went back to Earth. During this time the Glirpibbles and astronauts shared food, culture, music, traditions, and more. When the Astronauts were ready to go back, the Glirpkitties shared a most saddening fact, the no-contact rule. The Glorpians discovered that the best way to maintain peace with alien species was to not have contact, at all. Earth agreed and a decision was made that each other's existence would be acknowledged but the two planets would promise to not interact with each other.</p>
+                    <a href='036.html' class='next'>Global News</a>
+                </div>
+                <br>
+            </div>
+            <br><a href='034.html' class='goback'>Go Back</a>
+        </div>
+        <script>
+            const button = document.querySelector('#audio-button');
+            const audio = document.querySelector('#audio-file');
+            button.addEventListener('click', function() {audio.currentTime = 0;audio.play();});
+        </script>
+    </body>
+</html>

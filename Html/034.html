@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang='en'>
+    <head>
+        <link rel='shortcut icon' type='image/x-icon' href='../Images/favicon.ico' />
+        <meta charset='UTF-8'>
+        <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+        <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+        <title>Vstuck</title>
+        <link rel='stylesheet' type='text/css' href='VSASTUCKMAIN.CSS'>
+        <style>
+        .main{
+            width: 1100px;
+            margin: auto;
+        }
+        .upperarea{
+            margin: auto;
+            width: 700px;
+        }
+
+        .grayarea{
+            width: 700px;
+            margin: auto;
+        }
+
+        .photo{
+            width: 700px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .textbox{
+            width: 600px;
+            margin: auto;
+        }
+
+        body {
+            background-image: url('../Images/stars.png');
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+        }
+
+        </style>
+    </head>
+    <body>
+        <div class='main'>
+            <h1>==></h1>
+            <div class='upperarea'>
+                <button id="audio-button">
+                    <audio id="audio-file" src="../Audio/033.mp3"></audio>
+                    Play Audio
+                </button>
+                <img class='photo' src='../Images/034.gif' alt='Image could not be found' >
+            </div>
+            <div class='grayarea'>
+                <br>
+                <div class='textbox'>
+                    <p class='storytext'>In 1955, the Soviet Union and the United States were competing in what is now remembered as the space race. The two mega nations were competing to see who could send humans farther into the solar system. In April of that year, the United States became the first nation to successfully send a human-bearing spaceship to the close neighbor of Earth, Pehostla.</p>
+                    <a href='035.html' class='next'>First Contact</a>
+                </div>
+                <br>
+            </div>
+            <br><a href='033.html' class='goback'>Go Back</a>
+        </div>
+        <script>
+            const button = document.querySelector('#audio-button');
+            const audio = document.querySelector('#audio-file');
+            button.addEventListener('click', function() {audio.currentTime = 0;audio.play();});
+        </script>
+    </body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang='en'>
+    <head>
+        <link rel='shortcut icon' type='image/x-icon' href='../Images/favicon.ico' />
+        <meta charset='UTF-8'>
+        <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+        <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+        <title>Vstuck</title>
+        <link rel='stylesheet' type='text/css' href='VSASTUCKMAIN.CSS'>
+        <style>
+        .main{
+            width: 1100px;
+            margin: auto;
+        }
+        .upperarea{
+            margin: auto;
+            width: 800px;
+        }
+
+        .grayarea{
+            width: 800px;
+            margin: auto;
+        }
+
+        .photo{
+            width: 800px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .textbox{
+            width: 700px;
+            margin: auto;
+        }
+
+        body {
+            background-image: url('../Images/stars.png');
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+        }
+
+        </style>
+    </head>
+    <body>
+        <div class='main'>
+            <h1>Global News</h1>
+            <div class='upperarea'>
+                <img class='photo' src='../Images/036.png' alt='Image could not be found' >
+            </div>
+            <div class='grayarea'>
+                <br>
+                <div class='textbox'>
+                    <p class='storytext'>When the GlorpGlirp discovery made its way to global news, people watched with awe what type of wonders their solar system held and were happy about their newfound neighbors in space but were also saddened by the no-contact rule, although they understood its importance.</p>
+                    <a href='037.html' class='next'>Some people still hope</a>
+                </div>
+                <br>
+            </div>
+            <br><a href='035.html' class='goback'>Go Back</a>
+        </div>
+        <script>
+            const button = document.querySelector('#audio-button');
+            const audio = document.querySelector('#audio-file');
+            button.addEventListener('click', function() {audio.currentTime = 0;audio.play();});
+        </script>
+    </body>
+</html>
