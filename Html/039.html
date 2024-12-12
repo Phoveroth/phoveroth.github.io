@@ -8,13 +8,9 @@
         <title>Vstuck</title>
         <link rel='stylesheet' type='text/css' href='VSASTUCKMAIN.CSS'>
         <style>
-
-        body{
-              background-color: #000000;
-          }
-      
         .main{
-            background-color: #000000;
+            border: 5px outset #006400;
+            background-color: #282828;
             width: 1100px;
             margin: auto;
         }
@@ -26,7 +22,7 @@
         .grayarea{
             width: 800px;
             margin: auto;
-            background-color: #000000;
+            background-color: #161616;
         }
 
         .photo{
@@ -41,28 +37,26 @@
             margin: auto;
         }
 
-        .speak{
-          color: white;
-        }
-
         </style>
     </head>
     <body>
         <div class='main'>
-            <h1>[Hope]</h1>
+            <h1>Dark Green Light</h1>
             <div class='upperarea'>
-                <img class='photo' src='../Images/038.gif' alt='Image could not be found' >
+                <button id='audio-button'>
+                    <audio id='audio-file' src='../Audio/039.wav'></audio>
+                    Play Audio
+                </button>
+                <img class='photo' src='../Images/039.gif' alt='Image could not be found' >
             </div>
             <div class='grayarea'>
                 <br>
                 <div class='textbox'>
-                    <p class='storytext'>Darkness is what they were used to. So much so that the light that was slowly approaching didn't register in their minds until that same light called out to them.</p>
-                    <p class='speak'>The Light: Hang on!</p>
-                    <a href='039.html' class='next'>Dark Green Light</a>
+                    <a href='040.html' class='next'>==></a>
                 </div>
                 <br>
             </div>
-            <br><a href='037.html' class='goback'>Go Back</a>
+            <br><a href='038.html' class='goback'>Go Back</a>
         </div>
         <script>
             const button = document.querySelector('#audio-button');
