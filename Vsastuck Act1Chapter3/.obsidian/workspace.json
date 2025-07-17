@@ -15,9 +15,9 @@
               "state": {
                 "file": "Act1/Chapter3.canvas",
                 "viewState": {
-                  "x": 4152.729588132243,
-                  "y": 1869.7651172588767,
-                  "zoom": -0.7832949184303737
+                  "x": 6355.056190400314,
+                  "y": 986.9385181055436,
+                  "zoom": -0.11662825176370706
                 }
               },
               "icon": "lucide-layout-dashboard",
@@ -43,7 +43,8 @@
             "state": {
               "type": "file-explorer",
               "state": {
-                "sortOrder": "alphabetical"
+                "sortOrder": "alphabetical",
+                "autoReveal": false
               },
               "icon": "lucide-folder-closed",
               "title": "Files"
@@ -96,7 +97,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Act1/Chapter3.canvas",
+                "file": "Unsaved Image 1 2.jpg",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -106,7 +107,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for Chapter3"
+              "title": "Backlinks for Unsaved Image 1 2"
             }
           },
           {
@@ -152,7 +153,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300,
+    "width": 200,
     "collapsed": true
   },
   "left-ribbon": {

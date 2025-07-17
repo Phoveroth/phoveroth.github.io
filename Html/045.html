@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang='en'>
+    <head>
+        <link rel='shortcut icon' type='image/x-icon' href='../Images/favicon.ico' />
+        <meta charset='UTF-8'>
+        <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+        <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+        <title>Vstuck</title>
+        <link rel='stylesheet' type='text/css' href='VSASTUCKMAIN.CSS'>
+        <style>
+        .main{
+            border: 5px outset #adadad;
+            background-color: #282828;
+            width: 1100px;
+            margin: auto;
+        }
+        .upperarea{
+            margin: auto;
+            width: 800px;
+        }
+
+        .grayarea{
+            width: 800px;
+            margin: auto;
+            background-color: #161616;
+        }
+
+        .photo{
+            width: 800px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .textbox{
+            width: 700px;
+            margin: auto;
+        }
+
+        </style>
+    </head>
+    <body>
+        <div class='main'>
+            <h1>1:32 AM</h1>
+            <div class='upperarea'>
+                <img class='photo' src='../Images/045.png' alt='Image could not be found' >
+            </div>
+            <div class='grayarea'>
+                <br>
+                <div class='textbox'>
+                    <p class='speak coy'>Coy: We should really sleep soon, it's getting late. I'm sure Apollo will wake us up early for the adventure anyways.</p>
+                    <p class='speak aegis'>Aegis: Yeah, I don't think I could sleep if I laid down right now. I am too excited. I mean... even just the fact that we are finally together again. All of us I mean. It's been months since we did a 'grandma's house'.</p>
+                    <p class='speak joseph'>Joseph: Well we are growing up. Most of us have moved away farther and farther and are following different paths. It's hard to plan stuff like this when you're not an unemployed middle schooler.</p>
+                    <p class='speak aegis'>Aegis: I wish we could just be like how we were. I'm scared that if we grow farther and farther apart eventually we'll just...</p>
+                    <p class='speak pel'>Pel: Yaaa sacmalama, we keep talking over videochat and playing video games online. We'll be fine. Also, thinking about how sad it is when we are not together while we ARE together isn't helpful. We are together now. Dusty and Apollo haven't argued for once, we are preparing for a big fun adventure tomorrow. This is as good as it gets.</p>
+                    <p class='speak aegis'>Aegis: You're right. I guess you are right.</p>
+                    <a href='046.html' class='next'>Meanwhile in another room</a>
+                </div>
+                <br>
+            </div>
+            <br><a href='044.html' class='goback'>Go Back</a>
+        </div>
+        <script>
+            const button = document.querySelector('#audio-button');
+            const audio = document.querySelector('#audio-file');
+            button.addEventListener('click', function() {audio.currentTime = 0;audio.play();});
+        </script>
+    </body>
+</html>

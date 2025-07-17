@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang='en'>
+    <head>
+        <link rel='shortcut icon' type='image/x-icon' href='../Images/favicon.ico' />
+        <meta charset='UTF-8'>
+        <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+        <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+        <title>Vstuck</title>
+        <link rel='stylesheet' type='text/css' href='VSASTUCKMAIN.CSS'>
+        <style>
+        .main{
+            border: 5px outset #306800;
+            background-color: #282828;
+            width: 1100px;
+            margin: auto;
+        }
+        .upperarea{
+            margin: auto;
+            width: 800px;
+        }
+
+        .grayarea{
+            width: 800px;
+            margin: auto;
+            background-color: #161616;
+        }
+
+        .photo{
+            width: 800px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .textbox{
+            width: 700px;
+            margin: auto;
+        }
+
+        </style>
+    </head>
+    <body>
+        <div class='main'>
+            <h1>Contents</h1>
+            <div class='upperarea'>
+                <img class='photo' src='../Images/043.png' alt='Image could not be found' >
+            </div>
+            <div class='grayarea'>
+                <br>
+                <div class='textbox'>
+                    <p class='storytext'>The box was opened. In it were 3 items. A game manual, a compass, and a countdown timer that had seemingly started counting down from 48 hours the second it was created. The manual had cryptic letters on it and the compass was pointing to an arbitrary direction.</p>
+                    <p class='storytext'>Tarda carefully lifted all the contents and put them on the table, looking around in the box for more items but there wasn't any.</p>
+                    <p class='storytext'>Aegis went up to the cryptic manual and pulled out a notebook titled 'Language of the Stars'. In it were different alphabets and ciphers.</p>
+                    <p class='storytext'>There were some flat stares that seemed to say "Here he goes with his alien obsession." but also an understanding to not interfere. The machine did fall in a meteor so who was to say it ~wasn't~ alien.</p>
+                    <p class='speak apollo'>Apollo: I was really hoping for magical real life dnd.</p>
+                    <p class='speak coy'>Coy: Same here. But this doesn't even seem to be playable, I mean... a cryptic manual, a compass, and a timer...</p>
+                    <p class='speak alp'>Pongo: GUYS! It's like a scavenger hunt, and we get treasure at the end! We have to do this.</p>
+                    <p class='storytext'>It was getting late. There was a moment of silence where they all looked at each other, nodding, shrugging. There was understanding, it was too late for adventure.</p>
+                    <p class='speak', style="color:white;">Everyone: Nahhhhhhh.</p>
+                    <p class='speak apollo'>Apollo: Well then, we leave at first dawn!</p>
+                    <a href='044.html' class='next'>Get Late</a>
+                </div>
+                <br>
+            </div>
+            <br><a href='042.html' class='goback'>Go Back</a>
+        </div>
+        <script>
+            const button = document.querySelector('#audio-button');
+            const audio = document.querySelector('#audio-file');
+            button.addEventListener('click', function() {audio.currentTime = 0;audio.play();});
+        </script>
+    </body>
+</html>
