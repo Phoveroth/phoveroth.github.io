@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="shortcut icon" type="image/x-icon" href="../Images/favicon.ico" />
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Astronomy</title>
+        <link rel="stylesheet" type="text/css" href="VSASTUCKMAIN.CSS">
+        <style>
+            body {
+                background-color: #0b0b0b;
+            }
+
+            h1 {
+                font-size: 40px;
+                font-weight: bold;
+                font-family: 'Courier New', Courier, monospace;
+                color: #ffffff;
+                text-align: center;
+            }
+
+            .main{
+                border: 5px outset rgb(180, 30, 210);
+                background-color: #282828;
+                width: 1100px;
+                margin: auto;
+            }
+            .upperarea{
+                margin: auto;
+                width: 800px;
+            }
+            .grayarea{
+                width: 800px;
+                margin: auto;
+                background-color: #161616;
+            }
+            .photo{
+                width: 800px;
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            .textbox{
+                width: 700px;
+                margin: auto;
+            }
+
+            .storytext{
+                font-family: 'Adobe Garamond Pro Regular';
+                font-size: 22px;
+                text-align: center;
+                color: rgb(192, 192, 192);
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="main">
+            <h1>Astronomy</h1>
+
+            <div class="grayarea">
+                <br>
+                <div class="textbox">   
+                    <p class="storytext">
+                        Determine the distance between two celestial objects in our Solar System.
+                    </p>
+
+                    <pre class="storytext" id="out">Click the button</pre>
+
+                    <button id="button">Click</button> 
+                </div>
+                <br>
+            </div>
+            <br>
+        </div>
+
+        <script>
+
+            const params = new URLSearchParams({
+              format: "json",
+              COMMAND: "'499'",        // Mars
+              OBJ_DATA: "'NO'",
+              MAKE_EPHEM: "'YES'",
+              EPHEM_TYPE: "'OBSERVER'",
+              CENTER: "'500@399'",     // geocentric
+              START_TIME: "'2026-11-05'",
+              STOP_TIME: "'2026-11-06'",
+              STEP_SIZE: "'1 d'",
+              QUANTITIES: "'1,20'"     // RA/DEC, range
+            });
+            const api = "https://ssd.jpl.nasa.gov/api/horizons.api?" + params;
+        
+            document.getElementById("button").onclick = async () => {
+              const out = document.getElementById("out");
+              out.textContent = "Loading...";
+              try {
+                const res = await fetch(api);
+                const data = await res.json();
+                const rows = data.result.includes("$$SOE")
+                  ? data.result.split("$$SOE")[1].split("$$EOE")[0].trim()
+                  : data.result;  // shows Horizons' error message if the query was bad
+                out.textContent = rows;
+              } catch (e) {
+                out.textContent = "Direct route failed: " + e;
+                console.log(e);
+              }
+            };
+        </script>
+
+    </body>
+</html>
