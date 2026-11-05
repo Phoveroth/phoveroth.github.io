@@ -69,6 +69,20 @@
                     <pre class="storytext" id="out">Click the button</pre>
 
                     <button id="button">Click</button> 
+
+                    <form action="https://ssd.jpl.nasa.gov/api/horizons.api" method="GET" target="_blank">
+                        <input type="hidden" name="format" value="text">
+                        <input type="hidden" name="COMMAND" value="'499'">
+                        <input type="hidden" name="OBJ_DATA" value="'NO'">
+                        <input type="hidden" name="MAKE_EPHEM" value="'YES'">
+                        <input type="hidden" name="EPHEM_TYPE" value="'OBSERVER'">
+                        <input type="hidden" name="CENTER" value="'500@399'">
+                        <input type="hidden" name="START_TIME" value="'2026-11-05'">
+                        <input type="hidden" name="STOP_TIME" value="'2026-11-06'">
+                        <input type="hidden" name="STEP_SIZE" value="'1 d'">
+                        <input type="hidden" name="QUANTITIES" value="'1,20'">
+                        <button>Get Mars position</button>
+                    </form>
                 </div>
                 <br>
             </div>
