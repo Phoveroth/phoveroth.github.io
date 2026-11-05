@@ -91,6 +91,8 @@
 
         <script>
 
+            const WORKER = "https://astronomy-proxy.ardadsaw.workers.dev";
+
             const params = new URLSearchParams({
               format: "json",
               COMMAND: "'499'",        // Mars
@@ -103,30 +105,20 @@
               STEP_SIZE: "'1 d'",
               QUANTITIES: "'1,20'"     // RA/DEC, range
             });
-            const api = "https://ssd.jpl.nasa.gov/api/horizons.api?" + params;
-            const enc = encodeURIComponent(api);
-        
-            const routes = [
-              ["allorigins", "https://api.allorigins.win/raw?url=" + enc],
-              ["corsproxy",  "https://corsproxy.io/?url=" + enc]
-            ];
-        
+          
             document.getElementById("button").onclick = async () => {
               const out = document.getElementById("out");
               out.textContent = "Loading...";
-              for (const [name, url] of routes) {
-                try {
-                  const res = await fetch(url);
-                  const data = await res.json();
-                  out.textContent = "(via " + name + ")\n" + (data.result.includes("$$SOE")
-                    ? data.result.split("$$SOE")[1].split("$$EOE")[0].trim()
-                    : data.result);
-                  return;
-                } catch (e) {
-                  console.log(name + " failed:", e);
-                }
+              try {
+                const res = await fetch(WORKER + "?" + params);
+                const data = await res.json();
+                out.textContent = data.result.includes("$$SOE")
+                  ? data.result.split("$$SOE")[1].split("$$EOE")[0].trim()
+                  : data.result;  // shows Horizons' error message if the query was bad
+              } catch (e) {
+                out.textContent = "Failed: " + e;
+                console.log(e);
               }
-              out.textContent = "All proxies failed. See the Console (F12).";
             };
         </script>
 
