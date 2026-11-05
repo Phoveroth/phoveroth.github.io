@@ -13,6 +13,8 @@
             }
 
             body {
+                margin: 0;
+                min-height: 100vh;
                 background-color: #000;
                 background-image: url('../Images/stars.png');
                 background-repeat: no-repeat;
@@ -31,27 +33,21 @@
             .main{
                 border: 5px outset rgb(180, 30, 210);
                 background-color: #282828;
-                width: 800px;
+                width: 1100px;
+                max-width: 100%;
                 margin: auto;
-            }
-            .upperarea{
-                margin: auto;
-                width: 600px;
             }
             .grayarea{
-                width: 600px;
+                width: 800px;
+                max-width: 100%;
                 margin: auto;
                 background-color: #161616;
             }
-            .photo{
-                width: 600px;
-                display: block;
-                margin-left: auto;
-                margin-right: auto;
-            }
             .textbox{
-                width: 400px;
+                width: 700px;
+                max-width: 100%;
                 margin: auto;
+                padding: 0 12px;
             }
 
             .storytext{
@@ -63,6 +59,11 @@
 
             .iinput{
                 text-align: center;
+            }
+
+            pre.storytext {
+                white-space: pre-wrap;
+                word-break: break-word;
             }
         </style>
     </head>
@@ -218,16 +219,16 @@
 
                                 if (prev.rg < min.rg) {
                                     min = { date: prev.date, rg: prev.rg };
-                                    if (parseFloat(m[2]) < min.rg) {
-                                        min = { date: m[1], rg: parseFloat(m[2]) };
-                                    }
+                                }
+                                if (parseFloat(m[2]) < min.rg) {
+                                    min = { date: m[1], rg: parseFloat(m[2]) };
                                 }
 
                                 if (prev.rg > max.rg) {
                                     max = { date: prev.date, rg: prev.rg };
-                                    if (parseFloat(m[2]) > max.rg) {
-                                        max = { date: m[1], rg: parseFloat(m[2]) };
-                                    }
+                                }
+                                if (parseFloat(m[2]) > max.rg) {
+                                    max = { date: m[1], rg: parseFloat(m[2]) };
                                 }
                             }
                             prev = { k: n, date: m[1], rg: parseFloat(m[2]), neg };
