@@ -90,21 +90,29 @@
               QUANTITIES: "'1,20'"     // RA/DEC, range
             });
             const api = "https://ssd.jpl.nasa.gov/api/horizons.api?" + params;
+            const enc = encodeURIComponent(api);
+        
+            const routes = [
+              ["allorigins", "https://api.allorigins.win/raw?url=" + enc],
+              ["corsproxy",  "https://corsproxy.io/?url=" + enc]
+            ];
         
             document.getElementById("button").onclick = async () => {
               const out = document.getElementById("out");
               out.textContent = "Loading...";
-              try {
-                const res = await fetch(api);
-                const data = await res.json();
-                const rows = data.result.includes("$$SOE")
-                  ? data.result.split("$$SOE")[1].split("$$EOE")[0].trim()
-                  : data.result;  // shows Horizons' error message if the query was bad
-                out.textContent = rows;
-              } catch (e) {
-                out.textContent = "Direct route failed: " + e;
-                console.log(e);
+              for (const [name, url] of routes) {
+                try {
+                  const res = await fetch(url);
+                  const data = await res.json();
+                  out.textContent = "(via " + name + ")\n" + (data.result.includes("$$SOE")
+                    ? data.result.split("$$SOE")[1].split("$$EOE")[0].trim()
+                    : data.result);
+                  return;
+                } catch (e) {
+                  console.log(name + " failed:", e);
+                }
               }
+              out.textContent = "All proxies failed. See the Console (F12).";
             };
         </script>
 
