@@ -9,7 +9,10 @@
         <link rel="stylesheet" type="text/css" href="VSASTUCKMAIN.CSS">
         <style>
             body {
-                background-color: #0b0b0b;
+                background-image: url('../Images/stars.png');
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+                background-size: cover;
             }
 
             h1 {
@@ -52,6 +55,10 @@
                 text-align: center;
                 color: rgb(192, 192, 192);
             }
+
+            .iinput{
+                text-align: center;
+            }
         </style>
     </head>
 
@@ -66,23 +73,71 @@
                         Determine the distance between two celestial objects in our Solar System.
                     </p>
 
-                    <pre class="storytext" id="out">Click the button</pre>
+                    <label class="storytext">Start Date: </label>
+                    <input id="startdate" type="date" style="color-scheme: dark;" value="2280-11-05"><br><br>
 
-                    <button id="button">Click</button> 
+                    <label class="storytext">Stop Date: </label>
+                    <input id="stopdate" type="date" style="color-scheme: dark;" value="2520-11-05"><br><br>
 
-                    <form action="https://ssd.jpl.nasa.gov/api/horizons.api" method="GET" target="_blank">
-                        <input type="hidden" name="format" value="text">
-                        <input type="hidden" name="COMMAND" value="'499'">
-                        <input type="hidden" name="OBJ_DATA" value="'NO'">
-                        <input type="hidden" name="MAKE_EPHEM" value="'YES'">
-                        <input type="hidden" name="EPHEM_TYPE" value="'OBSERVER'">
-                        <input type="hidden" name="CENTER" value="'500@399'">
-                        <input type="hidden" name="START_TIME" value="'2026-11-05'">
-                        <input type="hidden" name="STOP_TIME" value="'2026-11-06'">
-                        <input type="hidden" name="STEP_SIZE" value="'1 d'">
-                        <input type="hidden" name="QUANTITIES" value="'1,20'">
-                        <button>Get Mars position</button>
-                    </form>
+                    <label class="storytext">Center: </label>
+                    <select id="center" style="color-scheme: dark;">
+                        <option value="500@10">Sun</option>
+                        <option value="500@199">Mercury</option>
+                        <option value="500@299">Venus</option>
+                        <option value="500@399">Earth</option>
+                        <option value="500@301" selected>Moon</option>
+                        <option value="500@499">Mars</option>
+                        <option value="500@401">Phobos</option>
+                        <option value="500@402">Deimos</option>
+                        <option value="500@599">Jupiter</option>
+                        <option value="500@503">Ganymede</option>
+                        <option value="500@504">Callisto</option>
+                        <option value="500@501">Io</option>
+                        <option value="500@502">Europa</option>
+                        <option value="500@699">Saturn</option>
+                        <option value="500@606">Titan</option>
+                        <option value="500@799">Uranus</option>
+                        <option value="500@899">Neptune</option>
+                    </select><br><br>
+
+                    <label class="storytext">Object: </label>
+                    <select id="object" style="color-scheme: dark;">
+                        <option value="10">Sun</option>
+                        <option value="199">Mercury</option>
+                        <option value="299">Venus</option>
+                        <option value="399">Earth</option>
+                        <option value="301">Moon</option>
+                        <option value="499" selected>Mars</option>
+                        <option value="401">Phobos</option>
+                        <option value="402">Deimos</option>
+                        <option value="599">Jupiter</option>
+                        <option value="503">Ganymede</option>
+                        <option value="504">Callisto</option>
+                        <option value="501">Io</option>
+                        <option value="502">Europa</option>
+                        <option value="699">Saturn</option>
+                        <option value="606">Titan</option>
+                        <option value="799">Uranus</option>
+                        <option value="899">Neptune</option>
+                    </select><br><br>
+
+                    <label class="storytext">Step Size: </label>
+                    <select id="stepsize" style="color-scheme: dark;">
+                        <option value="1 year">1 Year</option>
+                        <option value="1 mo">1 Month</option>
+                        <option value="7d">1 Week</option>
+                        <option value="1d" selected>1 Day</option>
+                        <option value="60m">1 Hour</option>
+                        <option value="1m">1 Minute</option>
+                    </select><br><br>
+
+                    <label class="storytext">Generate All Approaches?: </label>
+                    <input type="checkbox" id="generate" style="color-scheme: dark;"><br><br>
+
+                    <button id="button" style="color-scheme: dark;">Click</button>
+                    <pre class="storytext" id="min"></pre><br>
+                    <pre class="storytext" id="max"></pre><br>
+                    <pre class="storytext" id="out" >Click the button</pre>
                 </div>
                 <br>
             </div>
@@ -90,35 +145,101 @@
         </div>
 
         <script>
-
             const WORKER = "https://astronomy-proxy.ardadsaw.workers.dev";
 
-            const params = new URLSearchParams({
-              format: "json",
-              COMMAND: "'499'",        // Mars
-              OBJ_DATA: "'NO'",
-              MAKE_EPHEM: "'YES'",
-              EPHEM_TYPE: "'OBSERVER'",
-              CENTER: "'500@399'",     // geocentric
-              START_TIME: "'2026-11-05'",
-              STOP_TIME: "'2026-11-06'",
-              STEP_SIZE: "'1 d'",
-              QUANTITIES: "'1,20'"     // RA/DEC, range
-            });
+            const speed_c = 299792.458; // km/s
           
-            document.getElementById("button").onclick = async () => {
-              const out = document.getElementById("out");
-              out.textContent = "Loading...";
-              try {
-                const res = await fetch(WORKER + "?" + params);
-                const data = await res.json();
-                out.textContent = data.result.includes("$$SOE")
-                  ? data.result.split("$$SOE")[1].split("$$EOE")[0].trim()
-                  : data.result;  // shows Horizons' error message if the query was bad
-              } catch (e) {
-                out.textContent = "Failed: " + e;
-                console.log(e);
-              }
+            // can handle 80,000 rows
+            document.getElementById("button").onclick = async () =>
+            {
+                const startdate = document.getElementById("startdate").value;
+                const stopdate = document.getElementById("stopdate").value;
+                const center = document.getElementById("center").value;
+                const object = document.getElementById("object").value;
+                const stepsize = document.getElementById("stepsize").value;
+                const generate = document.getElementById("generate").checked;
+
+                const params = new URLSearchParams({
+                    format: "json",
+                    COMMAND: `'${object}'`,
+                    OBJ_DATA: "'NO'",
+                    MAKE_EPHEM: "'YES'",
+                    EPHEM_TYPE: "'VECTORS'",
+                    CENTER: `'${center}'`,
+                    START_TIME: `'${startdate}'`,
+                    STOP_TIME: `'${stopdate}'`,
+                    //TLIST: `'${date}'`,
+                    STEP_SIZE: `'${stepsize}'`,
+                    VEC_TABLE: "'6'"
+                });
+
+                const minout = document.getElementById("min");
+                const maxout = document.getElementById("max");
+                const out = document.getElementById("out");
+                out.textContent = "Loading...";
+                minout.textContent = "";
+                maxout.textContent = "";
+                try
+                {
+                    const res = await fetch(WORKER + "?" + params);
+                    const data = await res.json();
+                    const retrieved = data.result.includes("$$SOE")
+                        ? data.result.split("$$SOE")[1].split("$$EOE")[0].trim()
+                        : data.result;
+                    /* const retrieved = data.result; */
+
+                    const re = /A\.D\.\s+(\S+)\s+\S+[\s\S]*?RG\s*=\s*(\S+)\s+RR\s*=\s*(\S+)/g;
+                    let m, n = 0;
+                    let prev = { k: 0, date: null, rg: null, neg: null };
+                    let min = { date: null, rg: Infinity };
+                    let max = { date: null, rg: 0 };
+                    
+                    /* 
+                    m[0] = whole text
+                    m[1] = "DATE" 2026-Dec-06
+                    m[2] = "RG VALUE" 1.1235E+08
+                    m[3] = "RR VALUE" -1.5325E-04
+                    */
+                   
+                        const lines = [];
+                        while ((m = re.exec(retrieved)) !== null) {
+                            n++;
+                            const neg = m[3][0] === "-";
+                            
+                            if (prev.k !== 0 && prev.neg !== neg) {
+                                lines.push(`${prev.date}  ` +
+                                        prev.rg.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + " km" +
+                                        `  ${prev.neg ? "Close" : "Far"}`);
+
+                                if (prev.rg < min.rg) {
+                                    min = { date: prev.date, rg: prev.rg };
+                                    if (parseFloat(m[2]) < min.rg) {
+                                        min = { date: m[1], rg: parseFloat(m[2]) };
+                                    }
+                                }
+
+                                if (prev.rg > max.rg) {
+                                    max = { date: prev.date, rg: prev.rg };
+                                    if (parseFloat(m[2]) > max.rg) {
+                                        max = { date: m[1], rg: parseFloat(m[2]) };
+                                    }
+                                }
+                            }
+                            prev = { k: n, date: m[1], rg: parseFloat(m[2]), neg };
+                        }
+                        out.textContent = generate ? (lines.length ? lines.join("\n") : "No sign changes") : "";
+                    
+                    //out.textContent = retrieved;
+                    minout.textContent = `${min.date}  ` +
+                                       min.rg.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + " km  Closest\n" + 
+                                       (min.rg / speed_c).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + " lightsecond";
+                    maxout.textContent = `${max.date}  ` +
+                                       max.rg.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + " km  Farthest\n" + 
+                                       (max.rg / speed_c).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + " lightsecond";
+                } catch (e) {
+                    out.textContent = "Failed: " + e;
+                    console.log(e);
+                }
             };
         </script>
 
