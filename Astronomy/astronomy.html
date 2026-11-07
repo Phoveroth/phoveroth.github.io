@@ -33,7 +33,7 @@
             .main{
                 box-sizing: border-box;
                 border: 5px outset rgb(180, 30, 210);
-                background-color: #282828;
+                background-color: #2828286e;
                 width: 1100px;
                 max-width: 90%;
                 margin: auto;
@@ -42,7 +42,7 @@
                 width: 800px;
                 max-width: 90%;
                 margin: auto;
-                background-color: #161616;
+                background-color: #161616b0;
             }
             .textbox{
                 box-sizing: border-box;
@@ -77,8 +77,8 @@
             <div class="grayarea">
                 <br>
                 <div class="textbox">   
-                    <p class="storytext">
-                        Determine the distance between two celestial objects in our Solar System.
+                    <p class="storytext"> 
+                        Doğum günün kutlu olsun zroooo!!!
                     </p>
 
                     <label class="storytext">Start Date: </label>
@@ -209,33 +209,34 @@
                     m[3] = "RR VALUE" -1.5325E-04
                     */
                    
-                        const lines = [];
-                        while ((m = re.exec(retrieved)) !== null) {
-                            n++;
-                            const neg = m[3][0] === "-";
-                            
-                            if (prev.k !== 0 && prev.neg !== neg) {
-                                lines.push(`${prev.date}  ` +
-                                        prev.rg.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + " km" +
-                                        `  ${prev.neg ? "Close" : "Far"}`);
+                    // Determine the distance between two celestial objects in our Solar System.
+                    const lines = [];
+                    while ((m = re.exec(retrieved)) !== null) {
+                        n++;
+                        const neg = m[3][0] === "-";
+                        
+                        if (prev.k !== 0 && prev.neg !== neg) {
+                            lines.push(`${prev.date}  ` +
+                                    prev.rg.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + " km" +
+                                    `  ${prev.neg ? "Close" : "Far"}`);
 
-                                if (prev.rg < min.rg) {
-                                    min = { date: prev.date, rg: prev.rg };
-                                }
-                                if (parseFloat(m[2]) < min.rg) {
-                                    min = { date: m[1], rg: parseFloat(m[2]) };
-                                }
-
-                                if (prev.rg > max.rg) {
-                                    max = { date: prev.date, rg: prev.rg };
-                                }
-                                if (parseFloat(m[2]) > max.rg) {
-                                    max = { date: m[1], rg: parseFloat(m[2]) };
-                                }
+                            if (prev.rg < min.rg) {
+                                min = { date: prev.date, rg: prev.rg };
                             }
-                            prev = { k: n, date: m[1], rg: parseFloat(m[2]), neg };
+                            if (parseFloat(m[2]) < min.rg) {
+                                min = { date: m[1], rg: parseFloat(m[2]) };
+                            }
+
+                            if (prev.rg > max.rg) {
+                                max = { date: prev.date, rg: prev.rg };
+                            }
+                            if (parseFloat(m[2]) > max.rg) {
+                                max = { date: m[1], rg: parseFloat(m[2]) };
+                            }
                         }
-                        out.textContent = generate ? (lines.length ? lines.join("\n") : "No sign changes") : "";
+                        prev = { k: n, date: m[1], rg: parseFloat(m[2]), neg };
+                    }
+                    out.textContent = generate ? (lines.length ? lines.join("\n") : "No sign changes") : "";
                     
                     //out.textContent = retrieved;
                     minout.textContent = `${min.date}  ` +
